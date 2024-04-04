@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="AccountData.cs" />
     <Compile Include="AdressBookCorrected.cs" />
+    <Compile Include="ContactData.cs" />
     <Compile Include="GroupData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -55,6 +55,47 @@ namespace AdressBook_web_test
             LogOut();
         }
 
+        [Test]
+        public void ContactCreationTest()
+        {
+            OpenHomePage();
+            LogOn(new AccountData("admin", "secret"));
+            InitContactCreation();
+            FillContactForm(new ContactData("Evgenii", "Emelianov"));
+            SubmitContactCreation();
+            SubmitHome(); 
+        }
+
+
+        private void InitContactCreation() 
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+        }
+
+        private void FillContactForm(ContactData contact) 
+        {
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.Name);
+            driver.FindElement(By.Name("middlename")).Click();
+            driver.FindElement(By.Name("middlename")).Clear();
+            driver.FindElement(By.Name("middlename")).SendKeys(contact.LastName);
+        }
+
+        private void SubmitContactCreation() 
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
+        }
+       
+        private void SubmitHome() 
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+
+        }
+
+
+
+
         private void LogOut()
         {
             //Logout
@@ -93,6 +134,8 @@ namespace AdressBook_web_test
             driver.FindElement(By.Name("new")).Click();
         }
 
+        
+
         private void GoToGroupPage()
         {
             //go to group page
@@ -113,7 +156,7 @@ namespace AdressBook_web_test
             
         }
 
-        private void OpenHomePage()
+        internal void OpenHomePage()
         {
 
             driver.Navigate().GoToUrl(baseURL);
