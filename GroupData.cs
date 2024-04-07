@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AdressBook_web_test
 {
 
-	    internal class GroupData
+	    public class GroupData
     {
 		public GroupData(string name) // бызовый конструктор с 1 главным параметром Имя
 		{

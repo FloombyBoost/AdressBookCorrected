@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AdressBook_web_test.TestBase" Collapsed="true">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABBCAAQAIAAEAAAAAgAAEADAAAAJEAAEAAAAABBAAiA=</HashCode>
+      <FileName>TestBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdressBook_web_test.GroupData" Collapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GroupData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdressBook_web_test.ContactData" Collapsed="true">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>ContactData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdressBook_web_test.AccountData" Collapsed="true">
+    <Position X="3.25" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAEAAAAAAAACAAAAAgAAAAA=</HashCode>
+      <FileName>AccountData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdressBook_web_test.GroupCreationTests" Collapsed="true">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GroupCreationTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
