@@ -12,7 +12,7 @@ namespace AdressBook_web_test
         
 
         [Test]
-        public void TheGropeRemove()
+        public void TheGropeRemove()//
         {
             // ERROR: Caught exception [unknown command []]
             OpenHomePage();
