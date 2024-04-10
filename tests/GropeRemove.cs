@@ -15,12 +15,12 @@ namespace AdressBook_web_test
         public void TheGropeRemove()//
         {
             // ERROR: Caught exception [unknown command []]
-            OpenHomePage();
-            LogOn(new AccountData("admin", "secret"));
-            GoToGroupPage();
-            RemoveGroup();
-            ReturnGroupPage();
-            LogOut();
+            app.Navigator.OpenHomePage();
+            app.Auth.LogOn(new AccountData("admin", "secret"));
+            app.Navigator.GoToGroupPage();
+            app.Group.RemoveGroup();
+            app.Group.ReturnGroupPage();
+            app.Auth.LogOut();
 
         }
 
