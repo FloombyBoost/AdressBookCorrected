@@ -18,6 +18,8 @@ namespace AdressBook_web_test
         {
            
             app = new ApplicationManager();
+            app.Navigator.OpenHomePage();
+            app.Auth.LogOn(new AccountData("admin", "secret"));
 
         }
 

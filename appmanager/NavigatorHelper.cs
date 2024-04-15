@@ -15,7 +15,7 @@ namespace AdressBook_web_test
     {
         
         protected string baseURL;
-        public NavigatorHelper(IWebDriver driver,string baseURL) : base(driver)
+        public NavigatorHelper(ApplicationManager manager,string baseURL) : base(manager)
         {
             this.baseURL = baseURL;
         }

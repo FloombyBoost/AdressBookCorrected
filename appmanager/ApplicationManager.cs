@@ -24,10 +24,16 @@ namespace AdressBook_web_test
         {
             baseURL = "http://localhost/addressbook";
             driver = new ChromeDriver();
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigatorHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigatorHelper(this,baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+            
+        }
+
+        public IWebDriver Driver 
+        {
+            get { return driver; }
             
         }
 
@@ -64,5 +70,6 @@ namespace AdressBook_web_test
             get { return contactHelper; }
         }
 
+        
     }
 }

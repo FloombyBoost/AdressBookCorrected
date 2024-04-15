@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
+
+namespace AdressBook_web_test
+{ 
+
+[TestFixture]
+public class ContactRemove : TestBase
+{
+
+
+    [Test]
+    public void TheContactRemove()//
+    {
+        // ERROR: Caught exception [unknown command []]
+        app.Contact.Remove(3);
+
+
+    }
+
+
+
+
+
+
+
+}
+}
