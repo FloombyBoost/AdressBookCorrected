@@ -44,7 +44,7 @@ namespace AdressBook_web_test
 
         public ContactHelper SelectContact(int n)
         {
-            driver.FindElement(By.Id($"{n}")).Click();
+            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{1+n}]/td")).Click();
             return this;
         }
 
@@ -72,7 +72,7 @@ namespace AdressBook_web_test
         public ContactHelper InitContactModify(int n)
         {
             // driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click(); первая иконка
-            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{n}]/td[8]/a/img")).Click();  //все вроме первой, но возможно и первую найдет
+            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{1+n}]/td[8]/a/img")).Click();  //все вроме первой, но возможно и первую найдет
             return this;
         }
 

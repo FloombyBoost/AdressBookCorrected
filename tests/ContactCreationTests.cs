@@ -12,7 +12,7 @@ namespace AdressBook_web_test
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("Evgenii", "Emelianov");
+            ContactData contact = new ContactData("Evgenii03", "Emelianov");
             app.Contact.Create(contact);
         
         }

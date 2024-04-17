@@ -13,8 +13,8 @@ namespace AdressBook_web_test
         [Test]
         public void ContactModificationTests()
         {
-            ContactData newcontact = new ContactData("NewJon", "NewSnow");
-            app.Contact.Modify(3, newcontact);//будет работать со всеми кроме первого контакта!
+            ContactData newcontact = new ContactData("NewJon111", "NewSnow111");
+            app.Contact.Modify(1, newcontact);//будет работать со всеми кроме первого контакта!
 
 
         }

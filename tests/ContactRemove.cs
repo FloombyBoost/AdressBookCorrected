@@ -17,7 +17,7 @@ public class ContactRemove : TestBase
     public void TheContactRemove()//7
     {
         // ERROR: Caught exception [unknown command []]
-        app.Contact.Remove(3);
+        app.Contact.Remove(1);
 
 
     }
