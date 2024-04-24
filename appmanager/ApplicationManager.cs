@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Threading;
 
 namespace AdressBook_web_test
 {
@@ -19,8 +20,9 @@ namespace AdressBook_web_test
 
         protected IWebDriver driver;
          protected string baseURL;
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
-        public ApplicationManager()
+        private ApplicationManager()
         {
             baseURL = "http://localhost/addressbook";
             driver = new ChromeDriver();
@@ -31,6 +33,26 @@ namespace AdressBook_web_test
             
         }
 
+         ~ApplicationManager()//ДУРАЦКИЙ БАГ!!!
+        {
+            try
+            {
+                driver.Quit();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
+        }
+        public static ApplicationManager GetInstanse()
+        {
+             if (! app.IsValueCreated) 
+            {
+                app.Value = new ApplicationManager();
+                    
+            }
+            return app.Value;
+        }
         public IWebDriver Driver 
         {
             get { return driver; }
@@ -70,6 +92,6 @@ namespace AdressBook_web_test
             get { return contactHelper; }
         }
 
-        
+
     }
 }

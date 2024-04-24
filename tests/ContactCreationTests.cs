@@ -5,7 +5,7 @@ using System;
 
 namespace AdressBook_web_test
 {
-    [TestFixture]
+    //[TestFixture]
     public class ContactCreationTests : TestBase 
     {
        

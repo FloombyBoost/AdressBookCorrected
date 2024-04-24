@@ -8,6 +8,7 @@ using NUnit.Framework;
 
 namespace AdressBook_web_test
 {
+   
     public class TestBase
     {
       
@@ -17,20 +18,11 @@ namespace AdressBook_web_test
         public void SetupTest()
         {
            
-            app = new ApplicationManager();
-            app.Navigator.OpenHomePage();
-            app.Auth.LogOn(new AccountData("admin", "secret"));
+            app = ApplicationManager.GetInstanse();
 
         }
 
-        [TearDown]
-        public void TeardownTest()
-        {
-            
-          app.Stop();
-        }
-
-      
+        
 
       
 

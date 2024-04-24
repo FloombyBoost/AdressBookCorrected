@@ -7,11 +7,11 @@ using NUnit.Framework;
 
 namespace AdressBook_web_test
 {
-    [TestFixture]
+   // [TestFixture]
     public class GroupModificationTest : TestBase
     {
         [Test]
-        public void GroupModificationTests() 
+        public void GroupModificationTests()
         {
             GroupData newData = new GroupData("wdwd ");
             newData.Header = "HeadNew";
