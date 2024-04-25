@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace AdressBook_web_test
 {
-    [SetUpFixture]
+    [SetUpFixture] // НУЖНО УДАЛИТЬ ЭТУ ФИКСТУРУ 
     public class TestSuitFixture
     {
     
@@ -16,7 +16,7 @@ namespace AdressBook_web_test
         public void InitApplicationManager()
         {
             ApplicationManager app =  ApplicationManager.GetInstanse();
-            app.Navigator.OpenHomePage();
+           
             app.Auth.LogOn(new AccountData("admin", "secret"));
         }
 

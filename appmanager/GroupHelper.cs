@@ -36,29 +36,54 @@ namespace AdressBook_web_test
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnGroupPage();
-            manager.Auth.LogOut();
+            //manager.Auth.LogOut();
             return this;
         }
 
+      
 
         public GroupHelper Remove(int v)
         {
+
             manager.Navigator.GoToGroupPage();
-            SelectGroup(v);
-            RemoveGroup();
-            ReturnGroupPage();
-            manager.Auth.LogOut();
+            if (IsSelectGroup(v))
+            {
+                SelectGroup(v);
+                RemoveGroup();
+                ReturnGroupPage();
+                manager.Auth.LogOut();
+            }
+            else
+            {
+
+                Create(new GroupData("NewGrop"));
+                Remove(1);
+            }
             return this;
+        }
+        public bool IsSelectGroup(int v)
+        {
+            return IsElementPresent(By.XPath($"//div[@id='content']/form/span[{v}]/input"));
         }
 
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
-            SelectGroup(v);
-            InitGroupModify();
-            FillGroupForm(newData);
-            SubmitGroupModify();
-            ReturnGroupPage();
+            if (IsSelectGroup(v))
+            {
+
+                SelectGroup(v);
+                InitGroupModify();
+                FillGroupForm(newData);
+                SubmitGroupModify();
+                ReturnGroupPage();
+            }
+            else 
+            {
+
+                Create(new GroupData("NewGrop"));
+                Modify(1, newData);
+            }
             return this;
         }
 
@@ -97,6 +122,7 @@ namespace AdressBook_web_test
 
         public GroupHelper RemoveGroup()
         {
+            
             driver.FindElement(By.Name("delete")).Click();
             return this;
         }

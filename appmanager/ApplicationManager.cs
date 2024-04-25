@@ -48,8 +48,11 @@ namespace AdressBook_web_test
         {
              if (! app.IsValueCreated) 
             {
-                app.Value = new ApplicationManager();
-                    
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.OpenHomePage();
+                app.Value = newInstance;
+               
+
             }
             return app.Value;
         }

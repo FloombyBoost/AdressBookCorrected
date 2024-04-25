@@ -32,12 +32,20 @@ namespace AdressBook_web_test
 
         public ContactHelper Modify(int n, ContactData newcontact)
         {
-
-            //SelectContact(n);  как показывает практика выделение контакта перед изменением ничего не дает.Нужен конкретный клик по иконке
-            InitContactModify(n);
-            FillContactForm(newcontact);
-            SubmitContactModify();
-            SubmitHome();
+            if (IsSelectContact(n))
+            {
+                InitContactModify(n);
+                FillContactForm(newcontact);
+                SubmitContactModify();
+                SubmitHome();
+            }
+            else
+            {
+                Create(new ContactData("SystemName", "ForDeleted"));
+                Modify(1, new ContactData("Rename", "ReLastName"));
+            }
+                //SelectContact(n);  как показывает практика выделение контакта перед изменением ничего не дает.Нужен конкретный клик по иконке
+               
             return this;
            
         }
@@ -47,11 +55,25 @@ namespace AdressBook_web_test
             driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{1+n}]/td")).Click();
             return this;
         }
+        public bool IsSelectContact(int n)
+        {
+            return IsElementPresent(By.XPath($"//table[@id='maintable']/tbody/tr[{1 + n}]/td"));
+        }
 
         public ContactHelper Remove(int v)
         {
-            SelectContact(v);
-            SubmitContactRemove();
+            if (IsSelectContact(v)) 
+            {
+                SelectContact(v);
+                SubmitContactRemove();
+            }
+            else
+            {
+                Create(new ContactData("SystemName", "ForDeleted"));
+                Remove(1);
+
+            }
+           
 
             return this;
         }
@@ -85,7 +107,7 @@ namespace AdressBook_web_test
         public ContactHelper FillContactForm(ContactData contact)
         {
             Type(By.Name("firstname"), contact.Name);
-            Type(By.Name("middlename"), contact.LastName);
+            Type(By.Name("lastname"), contact.LastName);
            
             return this;
         }

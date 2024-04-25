@@ -6,8 +6,8 @@ using NUnit.Framework;
 
 namespace AdressBook_web_test
 {
-    //[TestFixture]
-    public class GropeRemove : TestBase
+    [TestFixture]
+    public class GropeRemove : AuthTestBase
     {
         
 
