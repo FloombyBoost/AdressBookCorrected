@@ -14,7 +14,7 @@ namespace AdressBook_web_test
         public void ContactModificationTests()
         {
             ContactData newcontact = new ContactData("NewJon111", "NewSnow111");
-            app.Contact.Modify(1, newcontact);//будет работать со всеми кроме первого контакта!
+            app.Contact.Modify(7, newcontact);//будет работать со всеми кроме первого контакта!
 
 
         }

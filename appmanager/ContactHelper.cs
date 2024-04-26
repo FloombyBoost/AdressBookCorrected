@@ -41,8 +41,11 @@ namespace AdressBook_web_test
             }
             else
             {
-                Create(new ContactData("SystemName", "ForDeleted"));
-                Modify(1, new ContactData("Rename", "ReLastName"));
+                InitContactCreation();
+                FillContactForm(new ContactData("SystemName", "ForModify"));
+                SubmitContactCreation();
+                SubmitHome();
+                Modify(n, new ContactData("Rename", "ReLastName"));
             }
                 //SelectContact(n);  как показывает практика выделение контакта перед изменением ничего не дает.Нужен конкретный клик по иконке
                
@@ -69,8 +72,11 @@ namespace AdressBook_web_test
             }
             else
             {
-                Create(new ContactData("SystemName", "ForDeleted"));
-                Remove(1);
+                InitContactCreation();
+                FillContactForm(new ContactData("SystemName", "ForDeleted"));
+                SubmitContactCreation();
+                SubmitHome();
+                Remove(v);
 
             }
            

@@ -16,7 +16,7 @@ namespace AdressBook_web_test
             GroupData newData = new GroupData("wdwd ");
             newData.Header = "HeadNew";
             newData.Footer = "FooterNew";
-            app.Group.Modify(1, newData);
+            app.Group.Modify(7, newData);
 
         }
 

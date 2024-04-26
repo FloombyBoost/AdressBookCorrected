@@ -56,8 +56,13 @@ namespace AdressBook_web_test
             else
             {
 
-                Create(new GroupData("NewGrop"));
-                Remove(1);
+                manager.Navigator.GoToGroupPage();
+                InitGroupCreation();
+                FillGroupForm(new GroupData("NewGrop"));
+                SubmitGroupCreation();
+                ReturnGroupPage();
+                //manager.Auth.LogOut();
+                Remove(v);
             }
             return this;
         }
@@ -81,8 +86,12 @@ namespace AdressBook_web_test
             else 
             {
 
-                Create(new GroupData("NewGrop"));
-                Modify(1, newData);
+                manager.Navigator.GoToGroupPage();
+                InitGroupCreation();
+                FillGroupForm(new GroupData("NewGrop"));
+                SubmitGroupCreation();
+                ReturnGroupPage();
+                Modify(v, newData);
             }
             return this;
         }
