@@ -36,7 +36,7 @@ namespace AdressBook_web_test
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnGroupPage();
-            //manager.Auth.LogOut();
+            manager.Auth.LogOut();
             return this;
         }
 
@@ -149,6 +149,17 @@ namespace AdressBook_web_test
             return this ;
         }
 
-     
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements) 
+            {
+                
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
     }
 }

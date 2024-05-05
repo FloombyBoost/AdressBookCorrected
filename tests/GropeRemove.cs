@@ -12,11 +12,67 @@ namespace AdressBook_web_test
         
 
         [Test]
-        public void TheGropeRemove()//
+        public void TheGropeRemove( int v)//
         {
             // ERROR: Caught exception [unknown command []]
+
+            if (app.Group.IsSelectGroup(v))
+            {
+                app.Group.Remove(v);
+            }
+
+            else
+            {
+
+                app.Navigator.GoToGroupPage();
+               app.Group.InitGroupCreation();
+                app.Group.FillGroupForm(new GroupData("NewGrop"));
+                app.Group.SubmitGroupCreation();
+                app.Group.ReturnGroupPage();
+                //manager.Auth.LogOut();
+                Remove(v);
+            }
+            return this;
+
+
             app.Group.Remove(4);
-           
+
+
+
+
+
+
+            public GroupHelper Remove(int v)
+            {
+
+                manager.Navigator.GoToGroupPage();
+                if (IsSelectGroup(v))
+                {
+                    SelectGroup(v);
+                    RemoveGroup();
+                    ReturnGroupPage();
+                    manager.Auth.LogOut();
+                }
+                else
+                {
+
+                    manager.Navigator.GoToGroupPage();
+                    InitGroupCreation();
+                    FillGroupForm(new GroupData("NewGrop"));
+                    SubmitGroupCreation();
+                    ReturnGroupPage();
+                    //manager.Auth.LogOut();
+                    Remove(v);
+                }
+                return this;
+            }
+
+
+
+
+
+
+
 
         }
 
