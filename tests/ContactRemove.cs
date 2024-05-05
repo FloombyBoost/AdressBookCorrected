@@ -14,7 +14,7 @@ public class ContactRemove : AuthTestBase
 
 
     [Test]
-    public void TheContactRemove()//7
+    public void TheContactRemove()//7===e
     {
         // ERROR: Caught exception [unknown command []]
         app.Contact.Remove(4);
