@@ -13,10 +13,24 @@ namespace AdressBook_web_test
         [Test]
         public void GroupModificationTests()
         {
-            GroupData newData = new GroupData("wdwd ");
+            int NumberGropeModify = 5;
+            app.Navigator.GoToGroupPage();
+            GroupData newData = new GroupData("ModiFYGrope");
             newData.Header = "HeadNew";
             newData.Footer = "FooterNew";
-            app.Group.Modify(7, newData);
+            if (app.Group.IsSelectGroup(NumberGropeModify))//Если находим группу модифицируем
+            {
+               
+                app.Group.Modify(NumberGropeModify, newData);
+            }
+            else // Если группу не находим,добавляем необходимое кол-во групп. Исключение 0 группа ( антизацикливание)
+            {
+                int CountAddGrope = 1;
+
+                app.Group.AutoGenerationGrope(NumberGropeModify);
+                app.Group.Modify(NumberGropeModify, newData);
+            }
+
 
         }
 

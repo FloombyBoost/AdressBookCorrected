@@ -36,36 +36,44 @@ namespace AdressBook_web_test
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnGroupPage();
-            manager.Auth.LogOut();
+            //manager.Auth.LogOut();
             return this;
         }
 
-      
+        public void AutoGenerationGrope(int untillNumber)
+        {
+            int CountAddGrope = 1;
+            while (!IsSelectGroup(untillNumber))
+            {
+                if (untillNumber == 0) break;
+
+
+                manager.Navigator.GoToGroupPage();
+                InitGroupCreation();
+                FillGroupForm(new GroupData($"AddNewGrope{CountAddGrope}"));
+                SubmitGroupCreation();
+                ReturnGroupPage();
+                CountAddGrope++;
+            }
+        }
+
+
 
         public GroupHelper Remove(int v)
         {
 
             manager.Navigator.GoToGroupPage();
-            if (IsSelectGroup(v))
-            {
+            
                 SelectGroup(v);
                 RemoveGroup();
                 ReturnGroupPage();
                 manager.Auth.LogOut();
-            }
-            else
-            {
-
-                manager.Navigator.GoToGroupPage();
-                InitGroupCreation();
-                FillGroupForm(new GroupData("NewGrop"));
-                SubmitGroupCreation();
-                ReturnGroupPage();
-                //manager.Auth.LogOut();
-                Remove(v);
-            }
+            
+            
             return this;
         }
+
+        
         public bool IsSelectGroup(int v)
         {
             return IsElementPresent(By.XPath($"//div[@id='content']/form/span[{v}]/input"));
@@ -74,25 +82,15 @@ namespace AdressBook_web_test
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
-            if (IsSelectGroup(v))
-            {
+            
 
                 SelectGroup(v);
                 InitGroupModify();
                 FillGroupForm(newData);
                 SubmitGroupModify();
                 ReturnGroupPage();
-            }
-            else 
-            {
-
-                manager.Navigator.GoToGroupPage();
-                InitGroupCreation();
-                FillGroupForm(new GroupData("NewGrop"));
-                SubmitGroupCreation();
-                ReturnGroupPage();
-                Modify(v, newData);
-            }
+            
+            
             return this;
         }
 

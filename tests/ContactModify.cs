@@ -13,8 +13,24 @@ namespace AdressBook_web_test
         [Test]
         public void ContactModificationTests()
         {
+
+            int NumberContactModify = 5;
             ContactData newcontact = new ContactData("NewJon111", "NewSnow111");
-            app.Contact.Modify(7, newcontact);//будет работать со всеми кроме первого контакта!
+            if (app.Contact.IsSelectContact(NumberContactModify))//Если находим контакт удаляем
+            {
+                app.Contact.Modify(NumberContactModify, newcontact);
+
+            }
+            else
+            {
+                {
+                    app.Contact.AutoGenerationContact(NumberContactModify);
+                    app.Contact.Modify(NumberContactModify, newcontact);
+                }
+            }
+
+
+            
 
 
         }

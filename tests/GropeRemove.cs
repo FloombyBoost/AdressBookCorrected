@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
+using OpenQA.Selenium.DevTools.V121.Debugger;
 
 namespace AdressBook_web_test
 {
@@ -12,75 +13,39 @@ namespace AdressBook_web_test
         
 
         [Test]
-        public void TheGropeRemove( int v)//
+        public void TheGropeRemove()//Новое удаление задание 8
         {
-            // ERROR: Caught exception [unknown command []]
-
-            if (app.Group.IsSelectGroup(v))
+            
+            int NumberGropeDelete = 5;
+            app.Navigator.GoToGroupPage();
+            if (app.Group.IsSelectGroup(NumberGropeDelete))//Если находим группу удаляем
             {
-                app.Group.Remove(v);
+                app.Group.Remove(NumberGropeDelete);
             }
 
-            else
+            else // Если группу не находим,добавляем необходимое кол-во групп. Исключение 0 группа ( антизацикливание)
             {
-
-                app.Navigator.GoToGroupPage();
-               app.Group.InitGroupCreation();
-                app.Group.FillGroupForm(new GroupData("NewGrop"));
-                app.Group.SubmitGroupCreation();
-                app.Group.ReturnGroupPage();
-                //manager.Auth.LogOut();
-                Remove(v);
+                app.Group.AutoGenerationGrope(NumberGropeDelete);
+                app.Group.Remove(NumberGropeDelete);
             }
-            return this;
-
-
-            app.Group.Remove(4);
-
-
-
-
-
-
-            public GroupHelper Remove(int v)
-            {
-
-                manager.Navigator.GoToGroupPage();
-                if (IsSelectGroup(v))
-                {
-                    SelectGroup(v);
-                    RemoveGroup();
-                    ReturnGroupPage();
-                    manager.Auth.LogOut();
-                }
-                else
-                {
-
-                    manager.Navigator.GoToGroupPage();
-                    InitGroupCreation();
-                    FillGroupForm(new GroupData("NewGrop"));
-                    SubmitGroupCreation();
-                    ReturnGroupPage();
-                    //manager.Auth.LogOut();
-                    Remove(v);
-                }
-                return this;
-            }
-
-
-
-
-
-
-
+            
+            //manager.Auth.LogOut();
 
         }
 
-       
 
 
 
 
 
+        
+
+
+
+
+
+
+        
     }
+    
 }
