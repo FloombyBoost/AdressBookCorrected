@@ -30,7 +30,7 @@ namespace AdressBook_web_test
             return this;
         }
 
-        public void AutoGenerationContact(int untillNumber)
+        public void AutoGenerationContact(int untillNumber)//новый  помощник
         {
             int CountAddContact = 1;
             while (!IsSelectContact(untillNumber))
