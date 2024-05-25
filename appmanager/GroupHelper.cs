@@ -45,7 +45,7 @@ namespace AdressBook_web_test
             int CountAddGrope = 1;
             while (!IsSelectGroup(untillNumber))
             {
-                if (untillNumber == 0) break;
+                //if (untillNumber == 0) break;
 
 
                 manager.Navigator.GoToGroupPage();
@@ -67,7 +67,7 @@ namespace AdressBook_web_test
                 SelectGroup(v);
                 RemoveGroup();
                 ReturnGroupPage();
-                manager.Auth.LogOut();
+                //manager.Auth.LogOut();
             
             
             return this;
@@ -76,7 +76,7 @@ namespace AdressBook_web_test
         
         public bool IsSelectGroup(int v)
         {
-            return IsElementPresent(By.XPath($"//div[@id='content']/form/span[{v}]/input"));
+            return IsElementPresent(By.XPath($"//div[@id='content']/form/span[{v+1}]/input"));
         }
 
         public GroupHelper Modify(int v, GroupData newData)
@@ -136,7 +136,7 @@ namespace AdressBook_web_test
 
         public GroupHelper SelectGroup(int v)
         {
-            driver.FindElement(By.XPath($"//div[@id='content']/form/span[{v}]/input")).Click();
+            driver.FindElement(By.XPath($"//div[@id='content']/form/span[{v+1}]/input")).Click();
             return this;
         }
 

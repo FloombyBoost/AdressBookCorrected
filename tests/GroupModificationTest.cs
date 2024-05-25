@@ -18,18 +18,17 @@ namespace AdressBook_web_test
             GroupData newData = new GroupData("ModiFYGrope");
             newData.Header = "HeadNew";
             newData.Footer = "FooterNew";
-            if (app.Group.IsSelectGroup(NumberGropeModify))//Если находим группу модифицируем
+            if (!app.Group.IsSelectGroup(NumberGropeModify))//Если не  находим группу модифицируем
             {
-               
-                app.Group.Modify(NumberGropeModify, newData);
-            }
-            else // Если группу не находим,добавляем необходимое кол-во групп. Исключение 0 группа ( антизацикливание)
-            {
-                int CountAddGrope = 1;
-
                 app.Group.AutoGenerationGrope(NumberGropeModify);
-                app.Group.Modify(NumberGropeModify, newData);
+                
             }
+            //else // Если группу находим,добавляем необходимое кол-во групп. Исключение 0 группа ( антизацикливание)
+            app.Group.Modify(NumberGropeModify, newData);
+            int CountAddGrope = 1;
+
+                
+            
 
 
         }

@@ -17,17 +17,14 @@ public class ContactRemove : AuthTestBase
     public void TheContactRemove()//7===e
     {
             // ERROR: Caught exception [unknown command []]
-            int NumberCotactDelete = 5;
-            if (app.Contact.IsSelectContact(NumberCotactDelete))//Если находим контакт удаляем
-            {
-                app.Contact.Remove(NumberCotactDelete);
-            }
-
-            else // Если группу не находим,добавляем необходимое кол-во контактов. Исключение 0 контакт ( антизацикливание)
+            int NumberCotactDelete = 10;
+            if (!app.Contact.IsSelectContact(NumberCotactDelete))//Если находим контакт удаляем
             {
                 app.Contact.AutoGenerationContact(NumberCotactDelete);
-                app.Contact.Remove(NumberCotactDelete);
             }
+
+           app.Contact.Remove(NumberCotactDelete);
+            
 
 
            

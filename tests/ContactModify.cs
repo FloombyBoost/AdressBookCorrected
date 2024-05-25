@@ -16,19 +16,16 @@ namespace AdressBook_web_test
 
             int NumberContactModify = 5;
             ContactData newcontact = new ContactData("NewJon111", "NewSnow111");
-            if (app.Contact.IsSelectContact(NumberContactModify))//Если находим контакт удаляем
+            if (!app.Contact.IsSelectContact(NumberContactModify))//Если находим контакт удаляем
             {
-                app.Contact.Modify(NumberContactModify, newcontact);
+                app.Contact.AutoGenerationContact(NumberContactModify);
+                
 
             }
-            else
-            {
-                {
-                    app.Contact.AutoGenerationContact(NumberContactModify);
-                    app.Contact.Modify(NumberContactModify, newcontact);
-                }
-            }
-
+           
+                    
+            app.Contact.Modify(NumberContactModify, newcontact);
+            
 
             
 

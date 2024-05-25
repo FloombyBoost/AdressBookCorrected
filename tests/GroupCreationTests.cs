@@ -19,13 +19,17 @@ namespace AdressBook_web_test
             
            
           
-            GroupData group = new GroupData("NameGroupTest");
-            group.Header = "GroupHeaderTest";
-            group.Footer = "GroupFooterTest";
+            GroupData group = new GroupData("AAAN");
+            group.Header = "aaa";
+            group.Footer = "GroupFooterTest3";
             List<GroupData> oldGroups = app.Group.GetGroupList();
             app.Group.Create(group);
             List<GroupData> newGroups = app.Group.GetGroupList();
-            ClassicAssert.AreEqual(oldGroups.Count +1, newGroups.Count);    
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+
+            ClassicAssert.AreEqual(oldGroups, newGroups);    
             
             
         }
@@ -53,7 +57,7 @@ namespace AdressBook_web_test
 
 
 
-            GroupData group = new GroupData("1s1s");
+            GroupData group = new GroupData("1s'1s");
             group.Header = "";
             group.Footer = "";
             List<GroupData> oldGroups = app.Group.GetGroupList();
