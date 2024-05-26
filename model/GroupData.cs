@@ -31,6 +31,7 @@ namespace AdressBook_web_test
 		public   int CompareTo(GroupData other)
 		{
 			if (Object.ReferenceEquals(other,null)) { return 1; }
+
 			return Name.CompareTo(other.Name);
 
 		}

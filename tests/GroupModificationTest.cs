@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace AdressBook_web_test
 {
@@ -13,7 +14,7 @@ namespace AdressBook_web_test
         [Test]
         public void GroupModificationTests()
         {
-            int NumberGropeModify = 5;
+            int NumberGropeModify = 9;
             app.Navigator.GoToGroupPage();
             GroupData newData = new GroupData("ModiFYGrope");
             newData.Header = "HeadNew";
@@ -21,11 +22,28 @@ namespace AdressBook_web_test
             if (!app.Group.IsSelectGroup(NumberGropeModify))//Если не  находим группу модифицируем
             {
                 app.Group.AutoGenerationGrope(NumberGropeModify);
-                
+                List<GroupData> oldGroups = app.Group.GetGroupList();
+                app.Group.Modify(NumberGropeModify, newData);
+                List<GroupData> newGroups = app.Group.GetGroupList();
+                oldGroups[NumberGropeModify].Name = newData.Name;
+                oldGroups.Sort();
+                newGroups.Sort();
+                ClassicAssert.AreEqual(oldGroups, newGroups);
+
+
             }
-            //else // Если группу находим,добавляем необходимое кол-во групп. Исключение 0 группа ( антизацикливание)
-            app.Group.Modify(NumberGropeModify, newData);
-            int CountAddGrope = 1;
+            else //
+            {
+                List<GroupData> oldGroups = app.Group.GetGroupList();
+                app.Group.Modify(NumberGropeModify, newData);
+                List<GroupData> newGroups = app.Group.GetGroupList();
+                oldGroups[NumberGropeModify].Name = newData.Name;
+                oldGroups.Sort();
+                newGroups.Sort();
+                ClassicAssert.AreEqual(oldGroups, newGroups);
+
+            }
+           
 
                 
             

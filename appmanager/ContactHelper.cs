@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -18,6 +19,36 @@ namespace AdressBook_web_test
         {
               
             }
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contact = new List<ContactData>();
+            List<String> Name = new List<String>();
+            List<String> LastName = new List<String>();
+
+            ICollection<IWebElement> elementName= driver.FindElements(By.XPath("//td[3]"));
+            
+            ICollection<IWebElement> elementLastName = driver.FindElements(By.XPath("//td[2]"));
+            
+
+            foreach (IWebElement element in elementName)
+            {
+
+                Name.Add(element.Text);
+            }
+            
+            foreach (IWebElement element in elementLastName)
+            {
+
+                LastName.Add(element.Text);
+            }
+           
+            for (int i = 0; i < elementName.Count; i++)
+            {
+                contact.Add(new ContactData(Name[i], LastName[i]));
+            }
+            
+            return contact;
+        }
 
 
 
@@ -32,7 +63,7 @@ namespace AdressBook_web_test
 
         public void AutoGenerationContact(int untillNumber)//новый  помощник
         {
-            int CountAddContact = 1;
+            int CountAddContact = 0;
             while (!IsSelectContact(untillNumber))
             {
                // if (untillNumber == 0) break;
@@ -61,12 +92,12 @@ namespace AdressBook_web_test
 
         public ContactHelper SelectContact(int n)
         {
-            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{1+n}]/td")).Click();
+            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{2+n}]/td")).Click();
             return this;
         }
         public bool IsSelectContact(int n)
         {
-            return IsElementPresent(By.XPath($"//table[@id='maintable']/tbody/tr[{1 + n}]/td"));
+            return IsElementPresent(By.XPath($"//table[@id='maintable']/tbody/tr[{2 + n}]/td"));
         }
 
         public ContactHelper Remove(int v)

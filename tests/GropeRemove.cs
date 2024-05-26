@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -21,25 +22,40 @@ namespace AdressBook_web_test
         {
             
             
-            int NumberGropeDelete = 3;
+            int NumberGropeDelete = 8;
             app.Navigator.GoToGroupPage();
+            
             if (!app.Group.IsSelectGroup(NumberGropeDelete))//Если  НЕ находим группу генерируем новые
             {
                 app.Group.AutoGenerationGrope(NumberGropeDelete);
-               // List<GroupData> oldGroups = app.Group.GetGroupList();  будет доработано в 9 задании
+                List<GroupData> oldGroups = app.Group.GetGroupList();
+                app.Group.Remove(NumberGropeDelete);
+                List<GroupData> newGroups = app.Group.GetGroupList();
+                oldGroups.RemoveAt(NumberGropeDelete);
+                oldGroups.Sort();
+                newGroups.Sort();
+                ClassicAssert.AreEqual(oldGroups, newGroups);
+            }
+            else 
+            {
+                List<GroupData> oldGroups = app.Group.GetGroupList();
+                app.Group.Remove(NumberGropeDelete);
+                List<GroupData> newGroups = app.Group.GetGroupList();
+                oldGroups.RemoveAt(NumberGropeDelete);
+                oldGroups.Sort();
+                newGroups.Sort();
+                ClassicAssert.AreEqual(oldGroups, newGroups);
+
+
 
             }
-            //else в 9 задании будет создан блок else 
-          //  {
-         //       List<GroupData> oldGroups = app.Group.GetGroupList(); начало 9 задания
 
-         //   }
+
+
+  
+
+
            
-
-            List<GroupData> newGroups = app.Group.GetGroupList();
-            app.Group.Remove(NumberGropeDelete);
-          //  oldGroups.RemoveAt(NumberGropeDelete);
-           // ClassicAssert.AreEqual(oldGroups, newGroups);
 
             //manager.Auth.LogOut();
 
