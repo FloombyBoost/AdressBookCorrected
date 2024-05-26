@@ -16,7 +16,7 @@ public class ContactRemove : AuthTestBase
 
 
     [Test]
-    public void TheContactRemove()//7===e
+    public void TheContactRemove()//7===e1
     {
             // ERROR: Caught exception [unknown command []]
             int NumberContactDelete = 0;
