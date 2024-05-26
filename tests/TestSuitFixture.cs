@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace AdressBook_web_test
 {
-    [SetUpFixture] // НУЖНО УДАЛИТЬ ЭТУ ФИКСТУРУ 
+    [SetUpFixture] // НУЖНО УДАЛИТЬ ЭТУ ФИКСТУРУ d
     public class TestSuitFixture
     {
     
