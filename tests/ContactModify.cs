@@ -15,7 +15,7 @@ namespace AdressBook_web_test
         public void ContactModificationTests()
         {
 
-            int NumberContactModify = 5;
+            int NumberContactModify = 3;
             ContactData newcontact = new ContactData("NewJon111", "NewSnow111");
             
 

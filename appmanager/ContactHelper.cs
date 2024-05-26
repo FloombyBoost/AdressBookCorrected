@@ -126,7 +126,7 @@ namespace AdressBook_web_test
         public ContactHelper InitContactModify(int n)
         {
             // driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click(); первая иконка
-            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{1+n}]/td[8]/a/img")).Click();  //все вроме первой, но возможно и первую найдет
+            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{2+n}]/td[8]/a/img")).Click();  //все вроме первой, но возможно и первую найдет
             return this;
         }
 
