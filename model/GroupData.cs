@@ -12,7 +12,7 @@ namespace AdressBook_web_test
     {
 		public GroupData(string name) // бызовый конструктор с 1 главным параметром Имя
 		{
-			this.Name = name;
+			Name = name;
 		}
 		public bool Equals(GroupData other) 
 		{
@@ -39,33 +39,38 @@ namespace AdressBook_web_test
 
 		public GroupData (string name,string header, string footer) // конструктор сразу для 3-х параметров
 		{
-			this.Name = name;
-			this.Header = header;
-			this.Footer = footer;
+			Name = name;
+			Header = header;
+			Footer = footer;
 		}
 
-        private string name; // главный параметр
-        public string Name
-		{
-			get { return name; }
-			set { name = value; }
-		}
+		// private string name; // главный параметр
+		public string Name { get; set; }
+		//{
+			//get { return name; }
+			//set { name = value; }
+		//}
 
-		private string header = "";// делаем поле вспомогательным
+		//private string header = "";// делаем поле вспомогательным
 
-		public string Header
+		public string Header { get; set; }
+		/*
 		{
 			get { return header; }
 			set { header = value; }
 		}
+		*/
 
-		private string footer = "";// делаем поле вспомогательным
+		//private string footer = "";// делаем поле вспомогательным
 
-        public string Footer
+        public string Footer { get; set; }
+		/*
 		{
 			get { return footer; }
 			set { footer = value; }
 		}
+		*/
+		public string Id { get; set; }
 
 
 	}

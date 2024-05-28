@@ -24,19 +24,11 @@ public class ContactRemove : AuthTestBase
             {
                 app.Contact.AutoGenerationContact(NumberContactDelete);
                 List<ContactData> oldContacts = app.Contact.GetContactList();
+                ContactData toBeRemoved = oldContacts[NumberContactDelete];
                 app.Contact.Remove(NumberContactDelete);
-              
-                List<ContactData> newContacts = app.Contact.GetContactList();
-               
-                oldContacts.RemoveAt(NumberContactDelete);
-                oldContacts.Sort();
-                newContacts.Sort();
-                ClassicAssert.AreEqual(oldContacts, newContacts);
-            }
-            else
-            {
-                List<ContactData> oldContacts = app.Contact.GetContactList();
-                app.Contact.Remove(NumberContactDelete);
+                app.Contact.SubmitHome();
+
+               ClassicAssert.AreEqual(oldContacts.Count - 1, app.Contact.Count());
 
                 List<ContactData> newContacts = app.Contact.GetContactList();
                
@@ -44,6 +36,32 @@ public class ContactRemove : AuthTestBase
                 oldContacts.Sort();
                 newContacts.Sort();
                 ClassicAssert.AreEqual(oldContacts, newContacts);
+                foreach (ContactData contact in newContacts)
+                {
+                    ClassicAssert.AreNotEqual(contact.Id, toBeRemoved.Id);
+                }
+
+            }
+            else
+            {
+                List<ContactData> oldContacts = app.Contact.GetContactList();
+                ContactData toBeRemoved = oldContacts[NumberContactDelete];
+                app.Contact.Remove(NumberContactDelete);
+                app.Contact.SubmitHome();
+
+                ClassicAssert.AreEqual(oldContacts.Count - 1, app.Contact.Count());
+
+                List<ContactData> newContacts = app.Contact.GetContactList();
+               
+                oldContacts.RemoveAt(NumberContactDelete);
+                oldContacts.Sort();
+                newContacts.Sort();
+                ClassicAssert.AreEqual(oldContacts, newContacts);
+
+                foreach (ContactData contact in newContacts)
+                {
+                    ClassicAssert.AreNotEqual(contact.Id, toBeRemoved.Id);
+                }
             }
 
 

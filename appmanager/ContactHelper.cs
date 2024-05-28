@@ -19,35 +19,61 @@ namespace AdressBook_web_test
         {
               
             }
+
+        private List<ContactData> ContactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contact = new List<ContactData>();
-            List<String> Name = new List<String>();
-            List<String> LastName = new List<String>();
 
-            ICollection<IWebElement> elementName= driver.FindElements(By.XPath("//td[3]"));
-            
-            ICollection<IWebElement> elementLastName = driver.FindElements(By.XPath("//td[2]"));
-            
-
-            foreach (IWebElement element in elementName)
+            if (ContactCache == null)
             {
+              
+                ContactCache = new List<ContactData>();
+                List<String> Name = new List<String>();
+                List<String> LastName = new List<String>();
+                List<String> Id= new List<String>();
 
-                Name.Add(element.Text);
-            }
-            
-            foreach (IWebElement element in elementLastName)
-            {
 
-                LastName.Add(element.Text);
+                ICollection<IWebElement> elementName = driver.FindElements(By.XPath("//td[3]"));
+
+                ICollection<IWebElement> elementLastName = driver.FindElements(By.XPath("//td[2]"));
+
+                ICollection<IWebElement> elementId= driver.FindElements(By.Name("selected[]"));
+                //By.TagName("input[name = \"selected[]\"]\"")
+
+
+
+                foreach (IWebElement element in elementId)
+                {
+
+                    
+                    Id.Add(element.GetAttribute("value"));
+                }
+
+
+                foreach (IWebElement element in elementName)
+                {
+
+                    Name.Add(element.Text);
+                    
+                }
+
+                foreach (IWebElement element in elementLastName)
+                {
+
+                    LastName.Add(element.Text);
+                }
+
+                for (int i = 0; i < elementName.Count; i++)
+                {
+                    ContactCache.Add(new ContactData(Name[i], LastName[i]) {Id = Id[i] });
+                    
+                }
+
+                
             }
-           
-            for (int i = 0; i < elementName.Count; i++)
-            {
-                contact.Add(new ContactData(Name[i], LastName[i]));
-            }
-            
-            return contact;
+
+            return new List<ContactData>(ContactCache);
         }
 
 
@@ -105,7 +131,9 @@ namespace AdressBook_web_test
             
                 SelectContact(v);
                 SubmitContactRemove();
-          
+            ContactCache = null;
+
+
 
             return this;
         }
@@ -120,6 +148,7 @@ namespace AdressBook_web_test
         public ContactHelper SubmitContactModify()
         {
             driver.FindElement(By.XPath("//input[21]")).Click();
+            ContactCache = null;
             return this;
         }
 
@@ -147,6 +176,7 @@ namespace AdressBook_web_test
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
+            ContactCache = null;
             return this;
         }
 
@@ -156,8 +186,12 @@ namespace AdressBook_web_test
             return this;
 
         }
+        public int Count()
+        {
+            return driver.FindElements(By.XPath("//td[3]")).Count;
+        }
 
-       
+
     }
 
 }

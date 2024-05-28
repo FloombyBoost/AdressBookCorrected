@@ -30,21 +30,37 @@ namespace AdressBook_web_test
                 app.Group.AutoGenerationGrope(NumberGropeDelete);
                 List<GroupData> oldGroups = app.Group.GetGroupList();
                 app.Group.Remove(NumberGropeDelete);
+
+                ClassicAssert.AreEqual(oldGroups.Count - 1, app.Group.Count());
+
                 List<GroupData> newGroups = app.Group.GetGroupList();
+                GroupData toBeRemoved = oldGroups[NumberGropeDelete];
                 oldGroups.RemoveAt(NumberGropeDelete);
                 oldGroups.Sort();
                 newGroups.Sort();
                 ClassicAssert.AreEqual(oldGroups, newGroups);
+                foreach (GroupData group in newGroups)
+                {
+                    ClassicAssert.AreNotEqual(group.Id, toBeRemoved.Id);
+                }
             }
             else 
             {
                 List<GroupData> oldGroups = app.Group.GetGroupList();
                 app.Group.Remove(NumberGropeDelete);
+
+                ClassicAssert.AreEqual(oldGroups.Count - 1, app.Group.Count());
+
                 List<GroupData> newGroups = app.Group.GetGroupList();
+                GroupData toBeRemoved = oldGroups[NumberGropeDelete];
                 oldGroups.RemoveAt(NumberGropeDelete);
                 oldGroups.Sort();
                 newGroups.Sort();
                 ClassicAssert.AreEqual(oldGroups, newGroups);
+                foreach (GroupData group in newGroups)
+                {
+                    ClassicAssert.AreNotEqual(group.Id, toBeRemoved.Id);
+                }
 
 
 

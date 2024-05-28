@@ -57,6 +57,7 @@ namespace AdressBook_web_test
 			set { lastname = value; }
 		}
 
+        public string Id { get; set; }
 
-	}
+    }
 }
