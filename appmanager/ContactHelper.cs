@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -191,7 +192,56 @@ namespace AdressBook_web_test
             return driver.FindElements(By.XPath("//td[3]")).Count;
         }
 
+        public void IsCorrectedRemoveContact(int NumberContactDelete)
+        {
+            List<ContactData> oldContacts = GetContactList();
+            ContactData toBeRemoved = oldContacts[NumberContactDelete];
+            Remove(NumberContactDelete);
+            SubmitHome();
 
+            ClassicAssert.AreEqual(oldContacts.Count - 1, Count());
+
+            List<ContactData> newContacts = GetContactList();
+
+            oldContacts.RemoveAt(NumberContactDelete);
+            oldContacts.Sort();
+            newContacts.Sort();
+            ClassicAssert.AreEqual(oldContacts, newContacts);
+            foreach (ContactData contact in newContacts)
+            {
+                ClassicAssert.AreNotEqual(contact.Id, toBeRemoved.Id);
+            }
+
+
+        }
+
+            public void IsCorrectedModifyContact(int NumberContactModify, ContactData newcontact)
+            {
+                List<ContactData> oldContacts = GetContactList();
+                ContactData oldContactData = oldContacts[NumberContactModify];
+                Modify(NumberContactModify, newcontact);
+
+                ClassicAssert.AreEqual(oldContacts.Count, Count());
+
+                List<ContactData> newContacts = GetContactList();
+                oldContacts[NumberContactModify] = newcontact;
+                oldContacts.Sort();
+                newContacts.Sort();
+                ClassicAssert.AreEqual(oldContacts, newContacts);
+
+                foreach (ContactData contact in newContacts)
+                {
+                    if (contact.Id == oldContactData.Id)
+                    {
+                        ClassicAssert.AreEqual(newcontact.Name, contact.Name);
+                        ClassicAssert.AreEqual(newcontact.LastName, contact.LastName);
+                    }
+                }
+            }
+
+        
     }
+
+
 
 }

@@ -22,56 +22,23 @@ namespace AdressBook_web_test
         {
             
             
-            int NumberGropeDelete = 8;
+            int NumberGropeDelete = 2;
             app.Navigator.GoToGroupPage();
             
             if (!app.Group.IsSelectGroup(NumberGropeDelete))//Если  НЕ находим группу генерируем новые
             {
                 app.Group.AutoGenerationGrope(NumberGropeDelete);
-                List<GroupData> oldGroups = app.Group.GetGroupList();
-                app.Group.Remove(NumberGropeDelete);
-
-                ClassicAssert.AreEqual(oldGroups.Count - 1, app.Group.Count());
-
-                List<GroupData> newGroups = app.Group.GetGroupList();
-                GroupData toBeRemoved = oldGroups[NumberGropeDelete];
-                oldGroups.RemoveAt(NumberGropeDelete);
-                oldGroups.Sort();
-                newGroups.Sort();
-                ClassicAssert.AreEqual(oldGroups, newGroups);
-                foreach (GroupData group in newGroups)
-                {
-                    ClassicAssert.AreNotEqual(group.Id, toBeRemoved.Id);
-                }
+                app.Group.IsCorrectedGroupRemove(NumberGropeDelete);
+                
             }
             else 
             {
-                List<GroupData> oldGroups = app.Group.GetGroupList();
-                app.Group.Remove(NumberGropeDelete);
-
-                ClassicAssert.AreEqual(oldGroups.Count - 1, app.Group.Count());
-
-                List<GroupData> newGroups = app.Group.GetGroupList();
-                GroupData toBeRemoved = oldGroups[NumberGropeDelete];
-                oldGroups.RemoveAt(NumberGropeDelete);
-                oldGroups.Sort();
-                newGroups.Sort();
-                ClassicAssert.AreEqual(oldGroups, newGroups);
-                foreach (GroupData group in newGroups)
-                {
-                    ClassicAssert.AreNotEqual(group.Id, toBeRemoved.Id);
-                }
-
+                app.Group.IsCorrectedGroupRemove(NumberGropeDelete);
 
 
             }
 
 
-
-  
-
-
-           
 
             //manager.Auth.LogOut();
 
