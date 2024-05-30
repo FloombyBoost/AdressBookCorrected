@@ -96,12 +96,21 @@ namespace AdressBook_web_test
                 }
                 else
                 {
-                    return (Email1 + "\r\n" + Email2 + "\r\n" + Email3 + "\r\n").Trim();
+                    return (matchEmail(Email1) + matchEmail(Email2) + matchEmail(Email3)).Trim();
                 }
             }
             set { allEmails = value; }
         }
-       
+
+
+        private string matchEmail(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email + "\r\n";
+        }
         private string CleanUp(string phone)
         {
             if (phone == null || phone == "")

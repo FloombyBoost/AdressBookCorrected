@@ -15,7 +15,7 @@ namespace AdressBook_web_test
         [Test]
         public void TestContactInformation ()
         {
-            int index = 0;
+            int index = 1;
             ContactData fromTable = app.Contact.GetContactInformationFromTable(index);
             ContactData fromForm = app.Contact.GetContactInformationFromEdit(index);
 
