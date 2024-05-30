@@ -23,12 +23,23 @@ public class ContactRemove : AuthTestBase
             if (!app.Contact.IsSelectContact(NumberContactDelete))//Если находим контакт удаляем
             {
                 app.Contact.AutoGenerationContact(NumberContactDelete);
-                app.Contact.IsCorrectedRemoveContact(NumberContactDelete);
+                         }
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+            ContactData toBeRemoved = oldContacts[NumberContactDelete];
+            app.Contact.Remove(NumberContactDelete);
+            app.Contact.SubmitHome();
 
-            }
-            else
+            ClassicAssert.AreEqual(oldContacts.Count - 1, app.Contact.Count());
+
+            List<ContactData> newContacts = app.Contact.GetContactList();
+
+            oldContacts.RemoveAt(NumberContactDelete);
+            oldContacts.Sort();
+            newContacts.Sort();
+            ClassicAssert.AreEqual(oldContacts, newContacts);
+            foreach (ContactData contact in newContacts)
             {
-                app.Contact.IsCorrectedRemoveContact(NumberContactDelete);
+                ClassicAssert.AreNotEqual(contact.Id, toBeRemoved.Id);
             }
 
 

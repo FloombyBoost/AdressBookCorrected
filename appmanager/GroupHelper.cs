@@ -59,46 +59,8 @@ namespace AdressBook_web_test
             }
         }
 
-        public void IsCorrectedGroupRemove( int NumberGropeDelete)
-        {
-            List<GroupData> oldGroups = GetGroupList();
-            Remove(NumberGropeDelete);
+       
 
-            ClassicAssert.AreEqual(oldGroups.Count - 1, Count());
-
-            List<GroupData> newGroups = GetGroupList();
-            GroupData toBeRemoved = oldGroups[NumberGropeDelete];
-            oldGroups.RemoveAt(NumberGropeDelete);
-            oldGroups.Sort();
-            newGroups.Sort();
-            ClassicAssert.AreEqual(oldGroups, newGroups);
-            foreach (GroupData group in newGroups)
-            {
-                ClassicAssert.AreNotEqual(group.Id, toBeRemoved.Id);
-            }
-        }
-        public void IsCorrectedGroupModify( int NumberGropeModify,GroupData newData)
-        {
-            List<GroupData> oldGroups = GetGroupList();
-            GroupData oldData = oldGroups[NumberGropeModify];
-            Modify(NumberGropeModify, newData);
-
-            ClassicAssert.AreEqual(oldGroups.Count, Count());
-
-            List<GroupData> newGroups = GetGroupList();
-            oldGroups[NumberGropeModify].Name = newData.Name;
-
-            oldGroups.Sort();
-            newGroups.Sort();
-            ClassicAssert.AreEqual(oldGroups, newGroups);
-            foreach (GroupData group in newGroups)
-            {
-                if (group.Id == oldData.Id)
-                {
-                    ClassicAssert.AreEqual(newData.Name, group.Name);
-                }
-            }
-        }
 
 
         public GroupHelper Remove(int v)
