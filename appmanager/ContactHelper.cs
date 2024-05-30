@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -161,6 +163,15 @@ namespace AdressBook_web_test
             return this;
         }
 
+        public ContactHelper InitContactInfo(int index)
+        {
+            // driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click(); первая иконка
+
+            //driver.FindElements(By.Name("entry"))[index].FindElement(By.CssSelector("img[alt=\"Details\"]")).Click();
+            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{2 + index}]/td[7]/a/img")).Click();  //все вроме первой, но возможно и первую найдет
+            return this;
+        }
+
         public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -214,7 +225,9 @@ namespace AdressBook_web_test
             string email1 = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
-            
+            string allInfo = "";
+
+
             return new ContactData(firstName, lastName)
             {
                 Address = address,
@@ -223,7 +236,8 @@ namespace AdressBook_web_test
                 WorkPhone = workPhone,
                 Email1 = email1,
                  Email2 = email2,
-                 Email3 = email3
+                Email3 = email3,
+                AllInfo = allInfo
             };
             
         }
@@ -246,6 +260,26 @@ namespace AdressBook_web_test
                
             };
             throw new NotImplementedException();
+        }
+
+        public String GetContactInformationFromInfo(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            InitContactInfo(index);
+
+            string allinfo = driver.FindElement(By.Id("content")).Text.Trim();
+            //ContactData ainfo = new ContactData("Allinfo", "All") {AllInfo = allinfo };
+            /*
+            IList<IWebElement> allInfo = driver.FindElements(By.Id("content"));
+            List<String> AllInfo = new List<String>();
+            foreach (IWebElement element in allInfo) 
+            {
+                AllInfo.Add(element.Text.Trim()); 
+            }
+            */
+
+            return allinfo;
+
         }
     }
 

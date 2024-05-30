@@ -24,5 +24,18 @@ namespace AdressBook_web_test
             ClassicAssert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
             ClassicAssert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
         }
+
+        [Test]
+        public void TestContactInformation2()
+        {
+            int index = 5;
+            string fromInfo = app.Contact.GetContactInformationFromInfo(index);
+            ContactData fromForm = app.Contact.GetContactInformationFromEdit(index);
+           
+         
+
+            ClassicAssert.AreEqual(fromInfo, fromForm.AllInfo);
+           
+        }
     }
 }

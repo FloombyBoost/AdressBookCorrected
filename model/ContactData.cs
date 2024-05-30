@@ -52,6 +52,7 @@ namespace AdressBook_web_test
         private string lastname;
         private string allPhones;
         private string allEmails;
+        private string allInfo;
 
         public string LastName
         {
@@ -68,7 +69,20 @@ namespace AdressBook_web_test
         public string Email1 { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
-        
+        public string AllInfo 
+        { get
+            {
+                return (Name +" "+ LastName + "\r\n" + matchAll(Address) + matchAll(AllPhonesAllInfo) +
+                  AllEmails).Trim();
+            }
+            set { allInfo = value; } 
+
+        }
+
+
+
+
+
         public string AllPhones 
         {
             get 
@@ -85,7 +99,25 @@ namespace AdressBook_web_test
             set { allPhones = value; }
         }
 
-       
+
+
+        public string AllPhonesAllInfo
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (ReplacePhone(HomePhone) + ReplacePhone(MobilePhone) + ReplacePhone(WorkPhone)).Trim();
+                }
+            }
+            set { allPhones = value; }
+        }
+
+
         public string AllEmails
         {
             get
@@ -110,6 +142,28 @@ namespace AdressBook_web_test
                 return "";
             }
             return email + "\r\n";
+        }
+
+        private string matchAll(string data)// новый
+        {
+            if (data == null || data == "")
+            {
+                return "";
+            }
+            return data + "\r\n\r\n";
+        }
+
+        private string ReplacePhone(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            if (phone == HomePhone) { return "H: "+ phone + "\r\n"; }
+            if (phone == MobilePhone) { return "M: " + phone + "\r\n"; }
+            return "W: " + phone + "\r\n"; 
+
+            
         }
         private string CleanUp(string phone)
         {
