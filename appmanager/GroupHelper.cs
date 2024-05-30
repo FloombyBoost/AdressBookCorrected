@@ -204,7 +204,22 @@ namespace AdressBook_web_test
 
 
 
-                    GroupCache.Add(new GroupData(element.Text) { Id = element.FindElement(By.TagName("input")).GetAttribute("value") });
+                    //GroupCache.Add(new GroupData(element.Text) { Id = element.FindElement(By.TagName("input")).GetAttribute("value") }); обращаемся каждый раз к браузеру за текстом
+                    GroupCache.Add(new GroupData(null) { Id = element.FindElement(By.TagName("input")).GetAttribute("value") });//оптимизация
+                }
+                string AllGroupName = driver.FindElement(By.CssSelector("div#content form")).Text;
+                string[] parts = AllGroupName.Split('\n');
+                int shift = GroupCache.Count - parts.Length;
+                for (int i = 0; i < GroupCache.Count; i++)
+                {
+                    if (i < shift)
+                    {
+                        GroupCache[i].Name = "";
+                    }
+                    else
+                    {
+                        GroupCache[i].Name = parts[i-shift].Trim();
+                    }
                 }
             }
 
