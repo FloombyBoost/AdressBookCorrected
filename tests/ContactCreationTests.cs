@@ -34,7 +34,7 @@ namespace AdressBook_web_test
 
 
 
-        [Test, TestCaseSource("RandomContactDataProvider()")]
+        [Test, TestCaseSource("RandomContactDataProvider")]
         public void ContactCreationTestDataDriven(ContactData contact)
         {
 
