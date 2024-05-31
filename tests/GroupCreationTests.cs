@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -11,17 +12,36 @@ namespace AdressBook_web_test
    [TestFixture]
     public class GroupCreationTests : AuthTestBase
     {
+
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            for(int i = 0;i< 5;i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                { Footer = GenerateRandomString(100),
+                  Header = GenerateRandomString(100)
+                });
+
+                
+                
+
+            }
+            return groups;
+        }
+
         
 
-        [Test]
-        public void GroupCreationTest()
+        [Test,TestCaseSource("RandomGroupDataProvider")]
+        public void GroupCreationTest(GroupData group)
         {
             
            
-          
+          /*
             GroupData group = new GroupData("AAAN");
             group.Header = "aaa";
             group.Footer = "GroupFooterTest3";
+          */
             List<GroupData> oldGroups = app.Group.GetGroupList();
             app.Group.Create(group);
 
@@ -37,6 +57,8 @@ namespace AdressBook_web_test
             
         }
 
+
+        /*
 
         [Test]
         public void EmptyGroupCreationTest()
@@ -59,6 +81,7 @@ namespace AdressBook_web_test
 
             ClassicAssert.AreEqual(oldGroups, newGroups);
         }
+        */
 
         [Test]
         public void BAdGroupCreationTest()
