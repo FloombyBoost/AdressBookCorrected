@@ -28,9 +28,12 @@ namespace AdressBook_web_test
         [Test]
         public void TestContactInformation2()
         {
-            int index = 5;
+            int index = 11;
             string fromInfo = app.Contact.GetContactInformationFromInfo(index);
             ContactData fromForm = app.Contact.GetContactInformationFromEdit(index);
+            Console.WriteLine(fromInfo);
+            Console.WriteLine("=======================================");
+            Console.WriteLine(fromForm.AllInfo);
            
          
 

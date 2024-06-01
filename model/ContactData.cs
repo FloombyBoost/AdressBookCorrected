@@ -73,8 +73,8 @@ namespace AdressBook_web_test
         public string AllInfo 
         { get
             {
-                return (Name +" "+ LastName + "\r\n" + matchAll(Address) + matchAll(AllPhonesAllInfo) +
-                  AllEmails).Trim();
+                return (Name +" "+ LastName + "\r\n" + matchAdress(Address) + matchAll(AllPhonesAllInfo) +
+                  matchAll(AllEmails)).Trim();
             }
             set { allInfo = value; } 
 
@@ -145,6 +145,14 @@ namespace AdressBook_web_test
             return email + "\r\n";
         }
 
+        private string matchAdress(string data)// новый
+        {
+            if (data == null || data == "")
+            {
+                return "\r\n";
+            }
+            return data + "\r\n\r\n";
+        }
         private string matchAll(string data)// новый
         {
             if (data == null || data == "")
