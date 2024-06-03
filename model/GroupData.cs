@@ -10,7 +10,11 @@ namespace AdressBook_web_test
 
 	    public class GroupData: IEquatable<GroupData>,IComparable<GroupData>// его можно сравнивать с другими обьектами <GroupData>
     {
-		public GroupData(string name) // бызовый конструктор с 1 главным параметром Имя
+        public GroupData() // бызовый конструктор с 1 главным параметром Имя
+        {
+          
+        }
+        public GroupData(string name) // бызовый конструктор с 1 главным параметром Имя
 		{
 			Name = name;
 		}

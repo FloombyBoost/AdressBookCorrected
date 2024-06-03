@@ -11,6 +11,11 @@ namespace AdressBook_web_test
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
 
+        public ContactData()
+        {
+           
+        }
+
         public ContactData(string name, string LastName)
         {
             this.Name = name;
