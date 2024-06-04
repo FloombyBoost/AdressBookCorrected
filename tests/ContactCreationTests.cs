@@ -38,7 +38,7 @@ namespace AdressBook_web_test
         }
 
 
-        public static IEnumerable<ContactData> GroupDataFromCsvFile()
+        public static IEnumerable<ContactData> ContactDataFromCsvFile()
         {
             List<ContactData> contact = new List<ContactData>();
             string[] lines = File.ReadAllLines(@"contacts.csv");
@@ -88,8 +88,8 @@ namespace AdressBook_web_test
             {
                 contact.Add(new ContactData()
                 {
-                    Address = range.Cells[i, 1].Value,
-                    Email2 = range.Cells[i, 2].Value,
+                    Name = range.Cells[i, 1].Value,
+                    LastName = range.Cells[i, 2].Value,
                     WorkPhone = range.Cells[i, 3].Value
 
                 });
@@ -103,7 +103,7 @@ namespace AdressBook_web_test
         }
 
        
-        [Test, TestCaseSource("RandomContactDataProvider")]//15 задание
+        [Test, TestCaseSource("ContactDataFromCsvFile")]//15 задание
         public void ContactCreationTestDataDriven(ContactData contact)
         {
 
