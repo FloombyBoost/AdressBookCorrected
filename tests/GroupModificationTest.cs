@@ -9,7 +9,7 @@ using NUnit.Framework.Legacy;
 namespace AdressBook_web_test
 {
     [TestFixture]
-    public class GroupModificationTest : AuthTestBase
+    public class GroupModificationTest : GroupTestBase
     {
         [Test]
         public void GroupModificationTests()

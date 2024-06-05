@@ -13,7 +13,7 @@ using OpenQA.Selenium.DevTools.V121.DOM;
 namespace AdressBook_web_test
 {
     [TestFixture]
-    public class GropeRemove : AuthTestBase
+    public class GropeRemove : GroupTestBase
     {
         
 
@@ -29,13 +29,15 @@ namespace AdressBook_web_test
             {
                 app.Group.AutoGenerationGrope(NumberGropeDelete);
             }
-            List<GroupData> oldGroups = app.Group.GetGroupList();
-            app.Group.Remove(NumberGropeDelete);
+            List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData toBeRemoved = oldGroups[NumberGropeDelete];
+
+            app.Group.Remove(toBeRemoved);
 
             ClassicAssert.AreEqual(oldGroups.Count - 1, app.Group.Count());
 
-            List<GroupData> newGroups = app.Group.GetGroupList();
-            GroupData toBeRemoved = oldGroups[NumberGropeDelete];
+            List<GroupData> newGroups = GroupData.GetAll();
+           // GroupData toBeRemoved = oldGroups[NumberGropeDelete];
             oldGroups.RemoveAt(NumberGropeDelete);
             oldGroups.Sort();
             newGroups.Sort();

@@ -77,7 +77,35 @@ namespace AdressBook_web_test
             return this;
         }
 
-        
+        public void Remove(GroupData group)
+        {
+
+            manager.Navigator.GoToGroupPage();
+
+            SelectGroup(group.Id);
+            RemoveGroup();
+            ReturnGroupPage();
+            //manager.Auth.LogOut();
+
+
+           
+        }
+
+
+        public GroupHelper SelectGroup(int v)
+        {
+            driver.FindElement(By.XPath($"//div[@id='content']/form/span[{v + 1}]/input")).Click();
+            return this;
+        }
+
+
+        public GroupHelper SelectGroup(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
+            return this;
+        }
+
+
         public bool IsSelectGroup(int v)
         {
             return IsElementPresent(By.XPath($"//div[@id='content']/form/span[{v+1}]/input"));
@@ -140,12 +168,7 @@ namespace AdressBook_web_test
             return this;
         }
 
-        public GroupHelper SelectGroup(int v)
-        {
-            driver.FindElement(By.XPath($"//div[@id='content']/form/span[{v+1}]/input")).Click();
-            return this;
-        }
-
+       
         public GroupHelper ReturnGroupPage()
         {
             //return to group page
