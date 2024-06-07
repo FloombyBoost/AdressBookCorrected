@@ -103,7 +103,7 @@ namespace AdressBook_web_test
         }
 
        
-        [Test, TestCaseSource("RandomContactDataProvider")]//15 задание
+        [Test, TestCaseSource("ContactDataFromExcelFile")]//15 задание
         public void ContactCreationTestDataDriven(ContactData contact)
         {
 
