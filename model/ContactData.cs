@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
 
 namespace AdressBook_web_test
+    
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
 
@@ -47,8 +50,17 @@ namespace AdressBook_web_test
             return (Name.CompareTo(other.Name));
 
         }
-        private string name;
 
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts select c).ToList();
+            }
+
+        }
+        private string name;
+        [Column(Name  = "firstname")]
         public string Name
         {
             get { return name; }
@@ -60,12 +72,13 @@ namespace AdressBook_web_test
         private string allEmails;
         private string allInfo;
 
+        [Column(Name = "lastname")]
         public string LastName
         {
             get { return lastname; }
             set { lastname = value; }
         }
-
+        [Column(Name = "id"),PrimaryKey]
         public string Id { get; set; }
         public string Address { get; set; }
         public string HomePhone { get; set; }

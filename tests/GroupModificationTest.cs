@@ -14,7 +14,7 @@ namespace AdressBook_web_test
         [Test]
         public void GroupModificationTests()
         {
-            int NumberGropeModify =23;
+            int NumberGropeModify = 15;
             app.Navigator.GoToGroupPage();
             GroupData newData = new GroupData("ModiFYGrope");
             newData.Header = "HeadNew";
@@ -23,14 +23,14 @@ namespace AdressBook_web_test
             {
                 app.Group.AutoGenerationGrope(NumberGropeModify);
                               }
-            List<GroupData> oldGroups = app.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[NumberGropeModify];
-            app.Group.Modify(NumberGropeModify, newData);
+            app.Group.Modify(oldData.Id, newData);
 
             ClassicAssert.AreEqual(oldGroups.Count, app.Group.Count());
 
-            List<GroupData> newGroups = app.Group.GetGroupList();
-            oldGroups[NumberGropeModify].Name = newData.Name;
+            List<GroupData> newGroups = GroupData.GetAll();
+            oldGroups[NumberGropeModify] = newData;
 
             oldGroups.Sort();
             newGroups.Sort();

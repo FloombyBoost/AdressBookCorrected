@@ -111,12 +111,12 @@ namespace AdressBook_web_test
             return IsElementPresent(By.XPath($"//div[@id='content']/form/span[{v+1}]/input"));
         }
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(string id, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
             
 
-                SelectGroup(v);
+                SelectGroup(id);
                 InitGroupModify();
                 FillGroupForm(newData);
                 SubmitGroupModify();

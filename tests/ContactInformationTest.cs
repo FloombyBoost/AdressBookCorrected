@@ -9,7 +9,7 @@ using NUnit.Framework.Legacy;
 namespace AdressBook_web_test
 {
     [TestFixture]
-    public class ContactInformationTest : AuthTestBase
+    public class ContactInformationTest : ContactTestBase
     {
 
         [Test]

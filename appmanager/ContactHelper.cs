@@ -70,7 +70,7 @@ namespace AdressBook_web_test
 
                 for (int i = 0; i < elementName.Count; i++)
                 {
-                    ContactCache.Add(new ContactData(Name[i], LastName[i]) {Id = Id[i] });
+                    ContactCache.Add(new ContactData(Name[i],LastName[i]) {Id = Id[i] });
                     
                 }
 
@@ -120,11 +120,39 @@ namespace AdressBook_web_test
            
         }
 
+
+        public ContactHelper Modify(string id , ContactData newcontact)
+        {
+
+            InitContactModify(id);
+            FillContactForm(newcontact);
+            SubmitContactModify();
+            SubmitHome();
+
+
+            //SelectContact(n);  как показывает практика выделение контакта перед изменением ничего не дает.Нужен конкретный клик по иконке
+
+            return this;
+
+        }
+
         public ContactHelper SelectContact(int n)
         {
             driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{2+n}]/td")).Click();
             return this;
         }
+
+        public ContactHelper SelectContact(string id)
+        {
+          
+            
+                driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+                return this;
+            
+
+            
+        }
+
         public bool IsSelectContact(int n)
         {
             return IsElementPresent(By.XPath($"//table[@id='maintable']/tbody/tr[{2 + n}]/td"));
@@ -135,6 +163,18 @@ namespace AdressBook_web_test
             
                 SelectContact(v);
                 SubmitContactRemove();
+            ContactCache = null;
+
+
+
+            return this;
+        }
+
+        public ContactHelper Remove(ContactData contact)
+        {
+
+            SelectContact(contact.Id);
+            SubmitContactRemove();
             ContactCache = null;
 
 
@@ -160,6 +200,15 @@ namespace AdressBook_web_test
         {
             // driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click(); первая иконка
             driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{2+n}]/td[8]/a/img")).Click();  //все вроме первой, но возможно и первую найдет
+            return this;
+        }
+
+        public ContactHelper InitContactModify(string id)
+        {
+            // driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click(); первая иконка
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "']/../..)")).FindElement(By.XPath("td[8]/a/img")).Click();  
+           // driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'][td[8]/a/img])")).FindElement(By.XPath("/")).Click();
+            // driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{2 + n}]/td[8]/a/img")).Click();  //все вроме первой, но возможно и первую найдет
             return this;
         }
 

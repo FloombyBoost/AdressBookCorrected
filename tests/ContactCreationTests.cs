@@ -15,7 +15,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace AdressBook_web_test
 {
     [TestFixture]
-    public class ContactCreationTests : AuthTestBase
+    public class ContactCreationTests : ContactTestBase
     {
       
         public static IEnumerable<ContactData> RandomContactDataProvider()
@@ -103,7 +103,7 @@ namespace AdressBook_web_test
         }
 
        
-        [Test, TestCaseSource("ContactDataFromCsvFile")]//15 задание
+        [Test, TestCaseSource("RandomContactDataProvider")]//15 задание
         public void ContactCreationTestDataDriven(ContactData contact)
         {
 
@@ -113,12 +113,12 @@ namespace AdressBook_web_test
               group.Header = "aaa";
               group.Footer = "GroupFooterTest3";
             */
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             app.Contact.Create(contact);
 
             ClassicAssert.AreEqual(oldContacts.Count + 1, app.Contact.Count());
          
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
@@ -133,13 +133,13 @@ namespace AdressBook_web_test
         public void ContactCreationTest()
         {
             ContactData contact = new ContactData("Evgenii03", "Emelianov");
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             app.Contact.Create(contact);
 
             ClassicAssert.AreEqual(oldContacts.Count + 1, app.Contact.Count());
 
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();

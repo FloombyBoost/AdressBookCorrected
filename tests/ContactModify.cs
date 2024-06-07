@@ -9,13 +9,13 @@ using NUnit.Framework.Legacy;
 namespace AdressBook_web_test
 {
    [TestFixture]
-    public class ContactModificationTest : AuthTestBase
+    public class ContactModificationTest : ContactTestBase
     {
         [Test]
         public void ContactModificationTests()
         {
 
-            int NumberContactModify =10;
+            int NumberContactModify = 1;
             ContactData newcontact = new ContactData("NewJon111", "NewSnow111");
             
 
@@ -25,13 +25,14 @@ namespace AdressBook_web_test
                 app.Contact.AutoGenerationContact(NumberContactModify);
                 
             }
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll(); 
             ContactData oldContactData = oldContacts[NumberContactModify];
-            app.Contact.Modify(NumberContactModify, newcontact);
+
+            app.Contact.Modify(oldContactData.Id, newcontact);
 
             ClassicAssert.AreEqual(oldContacts.Count, app.Contact.Count());
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll(); ;
             oldContacts[NumberContactModify] = newcontact;
             oldContacts.Sort();
             newContacts.Sort();

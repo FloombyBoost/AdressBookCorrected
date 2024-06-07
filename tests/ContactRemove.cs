@@ -11,7 +11,7 @@ namespace AdressBook_web_test
 { 
 
 [TestFixture]
-public class ContactRemove : AuthTestBase
+public class ContactRemove : ContactTestBase
     {
 
 
@@ -24,14 +24,14 @@ public class ContactRemove : AuthTestBase
             {
                 app.Contact.AutoGenerationContact(NumberContactDelete);
                          }
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData toBeRemoved = oldContacts[NumberContactDelete];
-            app.Contact.Remove(NumberContactDelete);
+            app.Contact.Remove(toBeRemoved);
             app.Contact.SubmitHome();
 
             ClassicAssert.AreEqual(oldContacts.Count - 1, app.Contact.Count());
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.RemoveAt(NumberContactDelete);
             oldContacts.Sort();
