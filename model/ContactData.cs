@@ -55,7 +55,7 @@ namespace AdressBook_web_test
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from c in db.Contacts select c).ToList();
+                return (from c in db.Contacts.Where(x => x.Deprecated == null) select c).ToList();
             }
 
         }
@@ -88,6 +88,8 @@ namespace AdressBook_web_test
         public string Email1 { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
         public string AllInfo 
         { get
             {

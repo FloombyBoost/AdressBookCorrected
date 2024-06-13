@@ -204,7 +204,25 @@ namespace AdressBook_web_test
                 System.Console.Out.WriteLine(contact);
             }
 
+              
+        }
+
+
+        [Test]
+        public void TestDBConnectivity3()
+        {
+
+
+
+            foreach (ContactData contact in ContactData.GetAll())
+            {
+                System.Console.Out.WriteLine(contact.Deprecated);
+            }
+
+           
 
         }
+
+
     }
 }

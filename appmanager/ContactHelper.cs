@@ -330,6 +330,59 @@ namespace AdressBook_web_test
             return allinfo;
 
         }
+
+         public  void AddcontactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            ClearGroupFilter();
+            SelectContactToAdd(contact.Id);//метод как в лекции
+            //SelectContact(contact.Id);// метод который был создан ранее
+            SelectGroupTOAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+            //Record successful deleted
+        }
+
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            SelectGroupFilter(group);
+            SelectContactToAdd(contact.Id);//может быть сработает?
+            SubmitRemoveFromGrope();
+            //SelectContact(contact.Id);// метод который был создан ранее
+            //SelectGroupTOAdd(group.Name);
+
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+
+        }
+        private void SubmitRemoveFromGrope()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+        private void SelectGroupFilter(GroupData group)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(group.Name);
+        }
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
+        private void SelectContactToAdd( string contactId)///  заменить метод в  AddcontactToGroup если  SelectContact(contact.Id);  не будет работать
+        {
+            driver.FindElement(By.Id(contactId)).Click();
+        }
+        private void SelectGroupTOAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        private void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
     }
 
 

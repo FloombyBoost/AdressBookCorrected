@@ -96,8 +96,9 @@ namespace AdressBook_web_test
 
             using (AddressBookDB db = new AddressBookDB())
 			{
+
 				return (from c in db.Contacts
-						from gcr in db.GCR.Where(p => p.GroupID == Id && p.ContactID == c.Id) select c  ).Distinct().ToList();
+						from gcr in db.GCR.Where(p => p.GroupID == Id && p.ContactID == c.Id && c.Deprecated == null) select c  ).Distinct().ToList();
 
 
 

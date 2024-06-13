@@ -20,34 +20,35 @@ namespace AdressBook_web_test
         [Test]
         public void TheGropeRemove()//Новое удаление задание 8
         {
-            
-            
-            int NumberGropeDelete = 4;
-            app.Navigator.GoToGroupPage();
-            
-            if (!app.Group.IsSelectGroup(NumberGropeDelete))//Если  НЕ находим группу генерируем новые
+            for (int i = 0; i < 40; i++)
             {
-                app.Group.AutoGenerationGrope(NumberGropeDelete);
+
+                int NumberGropeDelete = i;
+                app.Navigator.GoToGroupPage();
+
+                if (!app.Group.IsSelectGroup(NumberGropeDelete))//Если  НЕ находим группу генерируем новые
+                {
+                    app.Group.AutoGenerationGrope(NumberGropeDelete);
+                }
+                List<GroupData> oldGroups = GroupData.GetAll();
+                GroupData toBeRemoved = oldGroups[NumberGropeDelete];
+
+                app.Group.Remove(toBeRemoved);
+
+                ClassicAssert.AreEqual(oldGroups.Count - 1, app.Group.Count());
+
+                List<GroupData> newGroups = GroupData.GetAll();
+                // GroupData toBeRemoved = oldGroups[NumberGropeDelete];
+                oldGroups.RemoveAt(NumberGropeDelete);
+                oldGroups.Sort();
+                newGroups.Sort();
+                ClassicAssert.AreEqual(oldGroups, newGroups);
+                foreach (GroupData group in newGroups)
+                {
+                    ClassicAssert.AreNotEqual(group.Id, toBeRemoved.Id);
+                }
+
             }
-            List<GroupData> oldGroups = GroupData.GetAll();
-            GroupData toBeRemoved = oldGroups[NumberGropeDelete];
-
-            app.Group.Remove(toBeRemoved);
-
-            ClassicAssert.AreEqual(oldGroups.Count - 1, app.Group.Count());
-
-            List<GroupData> newGroups = GroupData.GetAll();
-           // GroupData toBeRemoved = oldGroups[NumberGropeDelete];
-            oldGroups.RemoveAt(NumberGropeDelete);
-            oldGroups.Sort();
-            newGroups.Sort();
-            ClassicAssert.AreEqual(oldGroups, newGroups);
-            foreach (GroupData group in newGroups)
-            {
-                ClassicAssert.AreNotEqual(group.Id, toBeRemoved.Id);
-            }
-
-
 
             //manager.Auth.LogOut();
 
