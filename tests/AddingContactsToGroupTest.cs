@@ -16,6 +16,8 @@ namespace AdressBook_web_test
         public void AddingContactToGroup()
         {
              List <GroupData> groupListData = GroupData.GetAll();
+            List<ContactData> contacttList = ContactData.GetAll();
+            app.Auth.AutoenerateGroupContact(groupListData, contacttList);
             for (int i = 0; i < groupListData.Count; i++)
             {
                 GroupData group = groupListData[i];
@@ -27,8 +29,12 @@ namespace AdressBook_web_test
 
                 }
                 catch
-                {
-                    continue;// тогда проверяем другую группу
+                { if( i < groupListData.Count-1) continue;// тогда проверяем другую группу
+                else 
+                    {
+                        ContactData Newcontact = new ContactData("NameTest", "AutoCreate{LastName}ContactForAdding");
+                        app.Contact.Create(Newcontact);
+                    }
                 }
                 ContactData contact = ContactData.GetAll().Except(oldList).First();//в блоке try  исключение не возникло==>1 контакт точно есть
                 app.Contact.AddcontactToGroup(contact, group);

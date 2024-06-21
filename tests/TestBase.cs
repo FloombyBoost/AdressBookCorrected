@@ -26,6 +26,9 @@ namespace AdressBook_web_test
 
         }
         public static Random rnd = new Random();
+
+    
+
         public static string GenerateRandomString(int max)
         {
             
