@@ -28,7 +28,7 @@ namespace AdressBook_web_test
         {
             if (Object.ReferenceEquals(other, null)) return false;
             if (Object.ReferenceEquals(this, other)) return true;
-            return (Name == other.Name) && (LastName == other.LastName);
+            return (Name == other.Name) && (LastName == other.LastName) && (Id == other.Id);  //&& 
         }
         public override int GetHashCode()
         {
@@ -45,7 +45,12 @@ namespace AdressBook_web_test
             if (Object.ReferenceEquals(other, null)) { return 1; }
             if (Name == other.Name)
             {
-                return (LastName.CompareTo(other.lastname));
+                if (LastName == other.LastName)
+                {
+                    return (Id.CompareTo(other.Id));
+
+                }
+                  return (LastName.CompareTo(other.lastname));
             }
             return (Name.CompareTo(other.Name));
 
